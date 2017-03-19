@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>任务列表angular</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        body.container{
+            max-width: 600px;
+        }
+        .m-y-2{margin-top: 20px;}
+        .checkbox{
+            margin-bottom: 0;
+            margin-right: 20px;
+        }
+        .done{
+            color:#ccc;
+        }
+        .done > .checkbox >label >span{
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body class="container" ng-app="TodoApp">
+<header>
+    <h1 class="display-3"><center>任务列表</center></h1>
+    <hr>
+</header>
+<section ng-controller="MainController">
+    <form class="input-group input-group-lg">
+        <input type="text" class="form-control" ng-model="text">
+        <span class="input-group-btn">
+            <button class="btn btn-secondary" ng-click="add()">添加</button>
+        </span>
+    </form>
+    <ul class="list-group m-y-2">
+        <li class="list-group-item" ng-class="{'done':item.done}" ng-repeat="item in todoList">
+            <button type="button" class="close" aria-label="Close" ng-click="delete(item)">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="item.done">
+                    <span>{{item.text}}</span>
+                </label>
+            </div>
+        </li>
+
+    </ul>
+<p>总共<strong>{{todoList.length}}</strong>个任务，已完成<strong>{{doneCount()}}</strong>个</p>
+</section>
+<div></div>
+<script src="node_modules/angular/angular.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
